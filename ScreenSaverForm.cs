@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ScreenSaver
 {
@@ -9,12 +10,10 @@ namespace ScreenSaver
 		private System.ComponentModel.IContainer components;
 		private Point MouseXY;
         private AxWMPLib.AxWindowsMediaPlayer WMP1;
-		private int ScreenNumber;
 
-		public ScreenSaverForm(int scrn)
+		public ScreenSaverForm()
 		{
 			InitializeComponent();
-			ScreenNumber = scrn;
 		}
 
 		protected override void Dispose( bool disposing )
@@ -31,14 +30,13 @@ namespace ScreenSaver
 
 		private void ScreenSaverForm_Load(object sender, System.EventArgs e)
 		{
-			this.Bounds = Screen.AllScreens[ScreenNumber].Bounds;
 			Cursor.Hide();
 			TopMost = true;
 		}
 
 		private void OnMouseEvent(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (!MouseXY.IsEmpty)
+           if (!MouseXY.IsEmpty)
 			{
 				if (MouseXY != new Point(e.X, e.Y))
 					Close();
@@ -61,7 +59,7 @@ namespace ScreenSaver
         }
         private void ScreenSaverForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
-			Close();
+            Close();
 		}
 
         private void WMP1_KeyDownEvent(object sender, AxWMPLib._WMPOCXEvents_KeyDownEvent e)
@@ -91,8 +89,8 @@ namespace ScreenSaver
             this.WMP1.Size = new System.Drawing.Size(292, 273);
             this.WMP1.TabIndex = 0;
             this.WMP1.UseWaitCursor = true;
-            this.WMP1.KeyDownEvent +=new AxWMPLib._WMPOCXEvents_KeyDownEventHandler(WMP1_KeyDownEvent);
-            this.WMP1.MouseMoveEvent +=new AxWMPLib._WMPOCXEvents_MouseMoveEventHandler(WMP1_MouseMoveEvent);
+            this.WMP1.KeyDownEvent += new AxWMPLib._WMPOCXEvents_KeyDownEventHandler(this.WMP1_KeyDownEvent);
+            this.WMP1.MouseMoveEvent += new AxWMPLib._WMPOCXEvents_MouseMoveEventHandler(this.WMP1_MouseMoveEvent);
             // 
             // ScreenSaverForm
             // 

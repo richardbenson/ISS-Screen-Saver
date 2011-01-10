@@ -96,6 +96,12 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Blanker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Blanker.Designer.cs">
+      <DependentUpon>Blanker.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScreenSaver.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +109,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Content Include="App.ico" />
+    <EmbeddedResource Include="Blanker.resx">
+      <DependentUpon>Blanker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ScreenSaverForm.resx">
       <DependentUpon>ScreenSaverForm.cs</DependentUpon>
     </EmbeddedResource>
