@@ -10,9 +10,13 @@ namespace ScreenSaver
 {
     public partial class Blanker : Form
     {
-        public Blanker()
+        public Blanker(int screen)
         {
             InitializeComponent();
+            //this.Left = Screen.AllScreens[screen].Bounds.Width;
+            //this.Top = Screen.AllScreens[screen].Bounds.Height;
+            //this.Location = Screen.AllScreens[screen].Bounds.Location;
+            this.Bounds = Screen.AllScreens[screen].Bounds;
         }
     }
 }

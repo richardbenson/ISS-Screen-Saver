@@ -11,14 +11,19 @@ namespace ScreenSaver
 		private Point MouseXY;
         private AxWMPLib.AxWindowsMediaPlayer WMP1;
 
-		public ScreenSaverForm()
+		public ScreenSaverForm(int screen)
 		{
 			InitializeComponent();
+            //this.Left = Screen.AllScreens[screen].Bounds.Width;
+            //this.Top = Screen.AllScreens[screen].Bounds.Height;
+            //this.Location = Screen.AllScreens[screen].Bounds.Location;
+            this.Bounds = Screen.AllScreens[screen].Bounds;
 		}
 
 		protected override void Dispose( bool disposing )
 		{
-			if( disposing )
+            WMP1.Dispose();
+            if( disposing )
 			{
 				if (components != null) 
 				{
@@ -100,6 +105,7 @@ namespace ScreenSaver
             this.Controls.Add(this.WMP1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScreenSaverForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ScreenSaver";
             this.Load += new System.EventHandler(this.ScreenSaverForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ScreenSaverForm_KeyDown);

@@ -1,13 +1,14 @@
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ScreenSaver
 {
 	public class DotNETScreenSaver
 	{
         private static List<Form> Savers = new List<Form> { };
-        private static Form tmpForm;
+        //private static Form tmpForm;
         
         [STAThread]
 		static void Main(string[] args) 
@@ -35,20 +36,17 @@ namespace ScreenSaver
 
         static void Launch()
         {
-            foreach (Screen s in Screen.AllScreens)
+            int primaryScreen = 0;
+            for (int i = Screen.AllScreens.GetLowerBound(0); i <= Screen.AllScreens.GetUpperBound(0); i++)
             {
-                if (s.Primary)
-                {
-                    tmpForm = new ScreenSaverForm();
+                if (Screen.AllScreens[i].Primary) {
+                    primaryScreen = i;
+                } else {
+                    new Blanker(i).Show();
                 }
-                else
-                {
-                    tmpForm = new Blanker();
-                }
-                tmpForm.Bounds = s.Bounds;
-                Savers.Add(tmpForm);
-                System.Windows.Forms.Application.Run(tmpForm);
             }
+            //MessageBox.Show("waiting");
+            System.Windows.Forms.Application.Run(new ScreenSaverForm(primaryScreen));
         }
     }
 }

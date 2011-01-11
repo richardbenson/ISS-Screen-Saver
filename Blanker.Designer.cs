@@ -41,7 +41,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Blanker";
-            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Blanker";
             this.ResumeLayout(false);
 
